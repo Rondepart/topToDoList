@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgb(169, 136, 90);
+}
+
+.main-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  min-height: 100%;
+  width: clamp(200px, 10vw ,300px);
+  background-color: rgb(190, 134, 99);
+}
+
+.notes-section {
+  flex: 1;
+  padding: 0px 16px;
+  background-color: rgb(95, 133, 129);
+}
