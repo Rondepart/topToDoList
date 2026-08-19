@@ -1,0 +1,40 @@
+/* System Fonts with system-ui */
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Adwaita Sans", Cantarell, Ubuntu, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* fluid font sizes */
+:root {
+    --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
+    --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
+    --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
+    --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+    --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+    --fs-xxxl: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
+}
+
+/* font weights */
+:root {
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700; 
+    --fw-extra-bold: 800;
+}
+
+/* reuseable font  size class */
+.text-sm { font-size: var((--var(--fs-sm))); }
+.text-base { font-size: var(--fs-base);}
+.text-md { font-size: var(--fs-md);}
+.text-lg { font-size: var(--fs-lg);}
+.text-xl { font-size: var(--fs-xl);}
+.text-xxl { font-size: var(--fs-xxl);}
+.text-xxxl { font-size: var(--fs-xxxl);}
+
+/* reuseable font weight class */
+.fw-regular { font-weight: var(--fw-regular);}
+.fw-medium { font-weight: var(--fw-medium);}
+.fw-semibold { font-weight: var(--fw-semibold);}
+.fw-bold { font-weight: var(--fw-bold);}
+.fw-extra-bold { font-weight: var(--fw-extra-bold);}
