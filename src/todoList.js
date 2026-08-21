@@ -1,19 +1,19 @@
 const tasks = {};
 
-const getTasks = () => tasks;
+export const getTasks = () => tasks;
 
 class Task {
     constructor(taskID, title, description, dueDate, priority, note) {
-    this.taskID = taskID;
-    this.title = title;
-    this.content = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.note = note;
+        this.taskID = taskID;
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.note = note;
     }
 }
 
-function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No Due Date', priority = 0, note = 'No notes') {
+export function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No due date', priority = 0, note = 'No notes') {
     let taskID = crypto.randomUUID();
 
     //checks if taskID is duped, regen task ID if it is
@@ -30,6 +30,41 @@ function createTask(title = 'Untitled', description = 'No Description', dueDate 
 
     const task = new Task(taskID, title, description, dueDate, priority, note);
     tasks[taskID] = task;
+
+    return taskID;
 }
 
-export {createTask, getTasks};
+//guard returns true if taskID is in tasks
+export function checkTaskID(taskID) {
+    return taskID in tasks;
+}
+
+export function deleteTask(taskID) {
+    if (!(checkTaskID(taskID))) return;
+    delete tasks[taskID];
+}
+
+export function updateTaskTitle(taskID, newTitle = 'Untitled') {
+    if (!(checkTaskID(taskID))) return;
+    tasks[taskID].title = newTitle;
+}
+
+export function updateTaskDescription(taskID, newDesc = 'No Desc') {
+    if (!(checkTaskID(taskID))) return;
+    tasks[taskID].description = newDesc;
+}
+
+export function updateTaskDueDate(taskID, newDueDate = 'No due date') {
+    if (!(checkTaskID(taskID))) return;
+    tasks[taskID].dueDate = newDueDate;
+}
+
+export function updateTaskPriority(taskID, newPriority = 0) {
+    if (!(checkTaskID(taskID))) return;
+    tasks[taskID].priority = newPriority;
+}
+
+export function updateTaskNote(taskID, newNote = 'No notes') {
+    if (!(checkTaskID(taskID))) return;
+    tasks[taskID].note = newNote;
+}
