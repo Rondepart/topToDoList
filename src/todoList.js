@@ -23,14 +23,14 @@ class Project {
 }
 
 //handle task string validation
-function validateTaskStrProperty(property, fallback) {
+function validateStrProperty(property, fallback) {
     property = property.trim();
     property = property === '' ? fallback : property;
     return property;
 }
 
 //handles task number validation
-function validateTaskNumProperty(property, fallback) {
+function validateNumProperty(property, fallback) {
     property = property !== Number(property) ? fallback : property;
     return property;
 }
@@ -43,11 +43,11 @@ export function createTask(title = 'Untitled', description = 'No Description', d
         taskID = crypto.randomUUID();
     }
 
-    title = validateTaskStrProperty(title, 'Untitled');
-    description = validateTaskStrProperty(description, 'No Description');
-    dueDate = validateTaskStrProperty(dueDate, 'No due date');
-    priority = validateTaskNumProperty(priority, 0);
-    note = validateTaskStrProperty(note, 'No notes');
+    title = validateStrProperty(title, 'Untitled');
+    description = validateStrProperty(description, 'No Description');
+    dueDate = validateStrProperty(dueDate, 'No due date');
+    priority = validateNumProperty(priority, 0);
+    note = validateStrProperty(note, 'No notes');
 
     const task = new Task(taskID, title, description, dueDate, priority, note);
     tasks[taskID] = task;
@@ -62,7 +62,7 @@ export function createProject(title = 'Untitled Proj') {
         projectID = crypto.randomUUID();
     }
 
-    title = validateTaskStrProperty(title, 'Untitled Proj');
+    title = validateStrProperty(title, 'Untitled Proj');
 
     const project = new Project(projectID, title);
     projects[projectID] = project;
@@ -71,8 +71,12 @@ export function createProject(title = 'Untitled Proj') {
 }
 
 //guard returns true if taskID is in tasks
-export function checkTaskID(taskID) {
+function checkTaskID(taskID) {
     return taskID in tasks;
+}
+
+function checkProjectID(projectID) {
+    return projectID in projects;
 }
 
 export function deleteTask(taskID) {
@@ -80,32 +84,43 @@ export function deleteTask(taskID) {
     delete tasks[taskID];
 }
 
+export function deleteProject(projectID) {
+    if (!(checkProjectID(projectID))) return;
+    delete projects[projectID];
+}
+
 export function updateTaskTitle(taskID, newTitle = 'Untitled') {
     if (!(checkTaskID(taskID))) return;
-    newTitle = validateTaskStrProperty(newTitle, 'Untitled');
+    newTitle = validateStrProperty(newTitle, 'Untitled');
     tasks[taskID].title = newTitle;
 }
 
 export function updateTaskDescription(taskID, newDesc = 'No Description') {
     if (!(checkTaskID(taskID))) return;
-    newDesc = validateTaskStrProperty(newDesc, 'No Description');
+    newDesc = validateStrProperty(newDesc, 'No Description');
     tasks[taskID].description = newDesc;
 }
 
 export function updateTaskDueDate(taskID, newDueDate = 'No due date') {
     if (!(checkTaskID(taskID))) return;
-    newDueDate = validateTaskStrProperty(newDueDate, 'No due date');
+    newDueDate = validateStrProperty(newDueDate, 'No due date');
     tasks[taskID].dueDate = newDueDate;
 }
 
 export function updateTaskPriority(taskID, newPriority = 0) {
     if (!(checkTaskID(taskID))) return;
-    newPriority = validateTaskNumProperty(newPriority, 0);
+    newPriority = validateNumProperty(newPriority, 0);
     tasks[taskID].priority = newPriority;
 }
 
 export function updateTaskNote(taskID, newNote = 'No notes') {
     if (!(checkTaskID(taskID))) return;
-    newNote = validateTaskStrProperty(newNote, 'No notes');
+    newNote = validateStrProperty(newNote, 'No notes');
     tasks[taskID].note = newNote;
+}
+
+export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
+    if(!(checkProjectID(projectID))) return;
+    newTitle = validateStrProperty(newTitle, 'Untitled Proj');
+    projects[projectID].title = newTitle;
 }

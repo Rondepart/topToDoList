@@ -9,12 +9,15 @@ const firstProjectID = listManager.createProject();
 console.log(structuredClone(listManager.getTasks()), structuredClone(listManager.getProjects()));
 
 listManager.updateTaskDescription(firstTaskID, '          I edited the goddanm description              ');
-console.log(structuredClone(listManager.getTasks()));
+listManager.updateProjectTitle(firstProjectID, ' JIM JIMMY JOGOES ????????????????                     ');
+console.log(structuredClone(listManager.getTasks()), structuredClone(listManager.getProjects()));
 
 
 listManager.updateTaskNote(firstTaskID, '                  Note: do be sure to not be late');
+listManager.updateProjectTitle(firstProjectID, '             maybe later !!!       ');
 console.log(structuredClone(listManager.getTasks()))
 
 listManager.updateTaskDescription(secondTaskID, 'SECOND task description, bazalright                          ')
 listManager.deleteTask(firstTaskID);
-console.log(structuredClone(listManager.getTasks()));
+listManager.deleteProject(firstProjectID);
+console.log(structuredClone(listManager.getTasks()), structuredClone(listManager.getProjects()));
