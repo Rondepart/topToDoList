@@ -13,6 +13,19 @@ class Task {
     }
 }
 
+//handle task string validation
+function validateTaskStrProperty(property, fallback) {
+    property = property.trim();
+    property = property === '' ? fallback : property;
+    return property;
+}
+
+//handles task number validation
+function validateTaskNumProperty(property, fallback) {
+    property = property !== Number(property) ? fallback : property;
+    return property;
+}
+
 export function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No due date', priority = 0, note = 'No notes') {
     let taskID = crypto.randomUUID();
 
@@ -21,12 +34,11 @@ export function createTask(title = 'Untitled', description = 'No Description', d
         taskID = crypto.randomUUID();
     }
 
-    //checks for empty strings, prio checks if a number is passed
-    title = title === '' ? 'Untitled' : title;
-    description = description === '' ? 'No description' : description;
-    dueDate = dueDate === '' ? 'No due date' : dueDate;
-    priority = priority !== Number(priority) ? 0 : priority;
-    note = note === '' ? 'No notes' : note;
+    title = validateTaskStrProperty(title, 'Untitled');
+    description = validateTaskStrProperty(description, 'No Description');
+    dueDate = validateTaskStrProperty(dueDate, 'No due date');
+    priority = validateTaskNumProperty(priority, 0);
+    note = validateTaskStrProperty(note, 'No notes');
 
     const task = new Task(taskID, title, description, dueDate, priority, note);
     tasks[taskID] = task;
@@ -46,25 +58,30 @@ export function deleteTask(taskID) {
 
 export function updateTaskTitle(taskID, newTitle = 'Untitled') {
     if (!(checkTaskID(taskID))) return;
+    newTitle = validateTaskStrProperty(newTitle, 'Untitled');
     tasks[taskID].title = newTitle;
 }
 
-export function updateTaskDescription(taskID, newDesc = 'No Desc') {
+export function updateTaskDescription(taskID, newDesc = 'No Description') {
     if (!(checkTaskID(taskID))) return;
+    newDesc = validateTaskStrProperty(newDesc, 'No Description');
     tasks[taskID].description = newDesc;
 }
 
 export function updateTaskDueDate(taskID, newDueDate = 'No due date') {
     if (!(checkTaskID(taskID))) return;
+    newDueDate = validateTaskStrProperty(newDueDate, 'No due date');
     tasks[taskID].dueDate = newDueDate;
 }
 
 export function updateTaskPriority(taskID, newPriority = 0) {
     if (!(checkTaskID(taskID))) return;
+    newPriority = validateTaskNumProperty(newPriority, 0);
     tasks[taskID].priority = newPriority;
 }
 
 export function updateTaskNote(taskID, newNote = 'No notes') {
     if (!(checkTaskID(taskID))) return;
+    newNote = validateTaskStrProperty(newNote, 'No notes');
     tasks[taskID].note = newNote;
 }
