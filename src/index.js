@@ -5,7 +5,8 @@ import * as listManager from './todoList.js';
 
 const firstTaskID = listManager.createTask();
 const secondTaskID = listManager.createTask();
-console.log(structuredClone(listManager.getTasks()));
+const firstProjectID = listManager.createProject();
+console.log(structuredClone(listManager.getTasks()), structuredClone(listManager.getProjects()));
 
 listManager.updateTaskDescription(firstTaskID, '          I edited the goddanm description              ');
 console.log(structuredClone(listManager.getTasks()));

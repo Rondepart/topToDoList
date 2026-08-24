@@ -1,6 +1,8 @@
 const tasks = {};
+const projects = {};
 
 export const getTasks = () => tasks;
+export const getProjects = () => projects;
 
 class Task {
     constructor(taskID, title, description, dueDate, priority, note) {
@@ -10,6 +12,13 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.note = note;
+    }
+}
+
+class Project {
+    constructor(projectID, title) {
+        this.projectID = projectID;
+        this.title = title;
     }
 }
 
@@ -44,6 +53,21 @@ export function createTask(title = 'Untitled', description = 'No Description', d
     tasks[taskID] = task;
 
     return taskID;
+}
+
+export function createProject(title = 'Untitled Proj') {
+    let projectID = crypto.randomUUID();
+
+    while(projectID in projects) {
+        projectID = crypto.randomUUID();
+    }
+
+    title = validateTaskStrProperty(title, 'Untitled Proj');
+
+    const project = new Project(projectID, title);
+    projects[projectID] = project;
+
+    return projectID;
 }
 
 //guard returns true if taskID is in tasks
