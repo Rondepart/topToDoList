@@ -24,24 +24,30 @@ class Project {
 
 //handle task string validation
 function validateStrProperty(property, fallback) {
+    if (typeof property !== 'string') return fallback;
     property = property.trim();
-    property = property === '' ? fallback : property;
-    return property;
+    return property === '' ? fallback : property;
 }
 
 //handles task number validation
 function validateNumProperty(property, fallback) {
-    property = property !== Number(property) ? fallback : property;
-    return property;
+    property = Number(property);
+    return Number.isNaN(property) ? fallback : property;
+}
+
+function generateUID() {
+    let uid = crypto.randomUUID();
+
+    //reset if uid is used
+    while(uid in tasks || uid in projects) {
+        uid = crypto.randomUUID();
+    }
+
+    return uid;
 }
 
 export function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No due date', priority = 0, note = 'No notes') {
-    let taskID = crypto.randomUUID();
-
-    //checks if taskID is duped, regen task ID if it is
-    while(taskID in tasks) {
-        taskID = crypto.randomUUID();
-    }
+    const taskID = generateUID();
 
     title = validateStrProperty(title, 'Untitled');
     description = validateStrProperty(description, 'No Description');
@@ -56,11 +62,7 @@ export function createTask(title = 'Untitled', description = 'No Description', d
 }
 
 export function createProject(title = 'Untitled Proj') {
-    let projectID = crypto.randomUUID();
-
-    while(projectID in projects) {
-        projectID = crypto.randomUUID();
-    }
+    const projectID = generateUID();
 
     title = validateStrProperty(title, 'Untitled Proj');
 
@@ -124,3 +126,11 @@ export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
     newTitle = validateStrProperty(newTitle, 'Untitled Proj');
     projects[projectID].title = newTitle;
 }
+
+export function initProject() {
+    if(Object.keys(projects).length === 0) {   
+        createProject('Your first project!');
+    }
+}
+
+initProject();
