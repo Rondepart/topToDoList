@@ -1,17 +1,24 @@
 const tasks = {};
 const projects = {};
+let defaultProjectID;
 
-export const getTasks = () => tasks;
-export const getProjects = () => projects;
+export const getDefaultProjectID = () => structuredClone(defaultProjectID);
+export const getTasks = () => structuredClone(tasks);
+export const getProjects = () => structuredClone(projects);
+export function getProjectTasks(projectID) {
+    if(!(checkProjectID(projectID))) return;
+    return console.log(Object.values(tasks).filter(task => task.projectGroupID === projectID));
+}
 
 class Task {
-    constructor(taskID, title, description, dueDate, priority, note) {
+    constructor(taskID, title, description, dueDate, priority, note, projectGroupID) {
         this.taskID = taskID;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.note = note;
+        this.projectGroupID = projectGroupID;
     }
 }
 
@@ -46,7 +53,12 @@ function generateUID() {
     return uid;
 }
 
-export function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No due date', priority = 0, note = 'No notes') {
+export function createTask(title = 'Untitled', description = 'No Description', dueDate = 'No due date', 
+priority = 0, note = 'No notes', projectGroupID = defaultProjectID) {
+    if(!(checkProjectID(projectGroupID))) {
+        projectGroupID = defaultProjectID;
+    }
+
     const taskID = generateUID();
 
     title = validateStrProperty(title, 'Untitled');
@@ -55,7 +67,7 @@ export function createTask(title = 'Untitled', description = 'No Description', d
     priority = validateNumProperty(priority, 0);
     note = validateStrProperty(note, 'No notes');
 
-    const task = new Task(taskID, title, description, dueDate, priority, note);
+    const task = new Task(taskID, title, description, dueDate, priority, note, projectGroupID);
     tasks[taskID] = task;
 
     return taskID;
@@ -88,6 +100,10 @@ export function deleteTask(taskID) {
 
 export function deleteProject(projectID) {
     if (!(checkProjectID(projectID))) return;
+    if (projectID === defaultProjectID) {
+        console.log('Cannot delete default project');
+        return;
+    }
     delete projects[projectID];
 }
 
@@ -121,6 +137,12 @@ export function updateTaskNote(taskID, newNote = 'No notes') {
     tasks[taskID].note = newNote;
 }
 
+export function updateTaskProjectGroup(taskID, newProjectGroup = getDefaultProjectID()) {
+    if (!(checkTaskID(taskID))) return;
+    if (!(checkProjectID(newProjectGroup))) return;
+    tasks[taskID].projectGroupID = newProjectGroup;
+}
+
 export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
     if(!(checkProjectID(projectID))) return;
     newTitle = validateStrProperty(newTitle, 'Untitled Proj');
@@ -129,7 +151,7 @@ export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
 
 export function initProject() {
     if(Object.keys(projects).length === 0) {   
-        createProject('Your first project!');
+        defaultProjectID = createProject('Uncategorized');
     }
 }
 
