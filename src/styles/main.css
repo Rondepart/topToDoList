@@ -22,6 +22,10 @@
   background-color: rgb(190, 134, 99);
 }
 
+.sidebar-projects {
+  list-style-type: none;
+}
+
 .notes-section {
   flex: 1;
   padding: 0px 16px;
