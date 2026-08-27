@@ -6,8 +6,8 @@ export const getDefaultProjectID = () => structuredClone(defaultProjectID);
 export const getTasks = () => structuredClone(tasks);
 export const getProjects = () => structuredClone(projects);
 export function getProjectTasks(projectID) {
-    if(!(checkProjectID(projectID))) return;
-    return console.log(Object.values(tasks).filter(task => task.projectGroupID === projectID));
+    if(!(checkProjectID(projectID))) return [];
+    return Object.values(tasks).filter(task => task.projectGroupID === projectID);
 }
 
 class Task {
@@ -104,6 +104,8 @@ export function deleteProject(projectID) {
         console.log('Cannot delete default project');
         return;
     }
+
+    Object.values(tasks).filter(task => task.projectGroupID === projectID).forEach(task => delete tasks[task.taskID]);
     delete projects[projectID];
 }
 
