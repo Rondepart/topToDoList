@@ -26,7 +26,7 @@
   list-style-type: none;
 }
 
-.notes-section {
+.todolist-wrapper {
   flex: 1;
   padding: 0px 16px;
   background-color: rgb(95, 133, 129);
