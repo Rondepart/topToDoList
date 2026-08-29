@@ -18,8 +18,14 @@ export function displayProjects(projects) {
 export function displayTodo(tasks) {
     const todoSection = document.querySelector('.todolist-section');
     todoSection.innerHTML = '';
+    const emptyProjectMsg = 'You have no task in this project'; 
 
-    Object.values(tasks).forEach(task => {
+    if(tasks.length === 0) {
+        todoSection.textContent = emptyProjectMsg;
+        return;
+    };
+
+    tasks.forEach(task => {
         const taskCard = document.createElement('div');
         const taskTitle = document.createElement('h3');
         const taskDescription = document.createElement('p');
@@ -39,6 +45,5 @@ export function displayTodo(tasks) {
         taskCard.append(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote);
         todoSection.appendChild(taskCard);
 
-        console.log(`title:${task.title}, description:${task.description}`);
     });
 }
