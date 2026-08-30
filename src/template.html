@@ -13,12 +13,25 @@
         <div class="main-wrapper">
             <nav class="sidebar">
                 <h1 class="sidebar-title">Projects</h1>
+
+                <button class="addProject-btn" type="button" command="show-modal" commandfor="add-project">+ Add Project</button>
+                <dialog id="add-project">
+                    <button commandfor="add-project" command="close">X</button>
+                    <form class="add-project-form">
+                        <label for="projectTitle">Project name:
+                            <input type="text" class="project-title" name="projectTitle" placeholder="Enter project name" maxlength="20" required>
+                        </label>
+                        <button type="submit" class="create-project">Create Project</button>
+                    </form>
+                </dialog>
+
                 <ul class="sidebar-projects">
 
                 </ul>
             </nav>
             <main class="todolist-wrapper">
                 <h1 class="todolist-title">Tasks</h1>
+                <button name="addTaskBtn" type="button" class="addTask-btn">+ Add Task</button>
                 <div class="todolist-section">
 
                 </div>
