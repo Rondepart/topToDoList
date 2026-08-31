@@ -8,20 +8,21 @@
 <body>
     <div class="layout">
         <header class="header">
-            <h1 class="header-title">Todo List</h1>
+            <h2 class="header-title">Todo List</h2>
         </header>
         <div class="main-wrapper">
             <nav class="sidebar">
-                <h1 class="sidebar-title">Projects</h1>
+                <h2 class="sidebar-title">Projects</h2>
 
                 <button class="addProject-btn" type="button" command="show-modal" commandfor="add-project">+ Add Project</button>
                 <dialog id="add-project">
                     <button commandfor="add-project" command="close">X</button>
                     <form class="add-project-form">
+                        <h3>Enter your project name</h3>
                         <label for="projectTitle">Project name:
-                            <input type="text" class="project-title" name="projectTitle" placeholder="Enter project name" maxlength="20" required>
+                            <input type="text" class="project-title" name="projectTitle" maxlength="20" required>
                         </label>
-                        <button type="submit" class="create-project">Create Project</button>
+                        <button type="submit" class="create-project">Create New Project</button>
                     </form>
                 </dialog>
 
@@ -30,8 +31,38 @@
                 </ul>
             </nav>
             <main class="todolist-wrapper">
-                <h1 class="todolist-title">Tasks</h1>
-                <button name="addTaskBtn" type="button" class="addTask-btn">+ Add Task</button>
+                <h2 class="todolist-title">Tasks</h2>
+
+                <button type="button" class="addTask-btn" command="show-modal" commandfor="add-task">+ Add Task</button>
+                <dialog id="add-task">
+                    <button commandfor="add-task" command="close">X</button>
+                    <form class="add-task-form">
+                        <div class="add-task-form-wrapper">
+                            <h3>Fill up required (*) forms to add task to your project</h3>
+                            <label for="taskTitle">*Task Title:
+                                <input type="text" class="task-title" name="taskTitle" placeholder="Enter task title required">
+                            </label>
+                            <label for="taskDescription">*Description:
+                                <textarea name="taskDescription" class="task-description" rows="3" cols="40" placeholder="Enter task description..."></textarea>
+                            </label>
+                            <label for="taskDueDate">Due Date:
+                                <input type="date" class="task-duedate" name="taskDueDate">
+                            </label>
+                            <label for="taskPriority">Task Priority:
+                                <select name="taskPriority" id="task-priority">
+                                    <option value="high">High</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="low" selected>Low</option>
+                                </select>
+                            </label>
+                            <label for="taskNote">Note:
+                                <textarea name="taskNote" class="task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
+                            </label>
+                            <button type="submit" class="create-task">Create New Task</button>
+                        </div>
+                    </form>
+                </dialog>
+
                 <div class="todolist-section">
 
                 </div>

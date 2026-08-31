@@ -31,3 +31,8 @@
   padding: 0px 16px;
   background-color: rgb(95, 133, 129);
 }
+
+.add-task-form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
