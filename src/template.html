@@ -19,8 +19,8 @@
                     <button commandfor="add-project" command="close">X</button>
                     <form class="add-project-form">
                         <h3>Enter your project name</h3>
-                        <label for="projectTitle">Project name:
-                            <input type="text" class="project-title" name="projectTitle" maxlength="20" required>
+                        <label for="project-title">Project name:
+                            <input type="text" id="project-title" class="project-title" name="projectTitle" maxlength="20" required>
                         </label>
                         <button type="submit" class="create-project">Create New Project</button>
                     </form>
@@ -39,24 +39,24 @@
                     <form class="add-task-form">
                         <div class="add-task-form-wrapper">
                             <h3>Fill up required (*) forms to add task to your project</h3>
-                            <label for="taskTitle">*Task Title:
-                                <input type="text" class="task-title" name="taskTitle" placeholder="Enter task title" required>
+                            <label for="task-title">*Task Title:
+                                <input type="text" id="task-title" class="task-title" name="taskTitle" placeholder="Enter task title" required>
                             </label>
-                            <label for="taskDescription">*Description:
-                                <textarea name="taskDescription" class="task-description" rows="3" cols="40" placeholder="Enter task description..." required></textarea>
+                            <label for="task-description">*Description:
+                                <textarea name="taskDescription" id="task-description" class="task-description" rows="3" cols="40" placeholder="Enter task description..." required></textarea>
                             </label>
-                            <label for="taskDueDate">Due Date:
-                                <input type="date" class="task-duedate" name="taskDueDate">
+                            <label for="task-duedate">Due Date:
+                                <input type="date" id="task-duedate" class="task-duedate" name="taskDueDate">
                             </label>
-                            <label for="taskPriority">Task Priority:
+                            <label for="task-priority">Task Priority:
                                 <select name="taskPriority" id="task-priority">
                                     <option value="high">High</option>
                                     <option value="moderate">Moderate</option>
                                     <option value="low" selected>Low</option>
                                 </select>
                             </label>
-                            <label for="taskNote">Note:
-                                <textarea name="taskNote" class="task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
+                            <label for="task-note">Note:
+                                <textarea name="taskNote" id="task-note" class="task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
                             </label>
                             <button type="submit" class="create-task">Create New Task</button>
                         </div>
