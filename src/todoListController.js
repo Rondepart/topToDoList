@@ -1,7 +1,13 @@
 import * as listManager from './todoList.js';
 import * as listDOM from './todoListDOM.js';
 
-let currentProjectGroupID = listManager.getDefaultProjectID(); 
+let currentProjectGroupID = listManager.getDefaultProjectID();
+let projectTasks = listManager.getProjectTasks(currentProjectGroupID);
+
+function updProjectTasks() {
+    projectTasks = listManager.getProjectTasks(currentProjectGroupID);
+    listDOM.displayTodo(projectTasks);
+}
 
 export function initSidebarEvents() {
     const sidebarProjects = document.querySelector('.sidebar-projects');
@@ -15,10 +21,9 @@ export function initSidebarEvents() {
             return;
         }
 
-        const currentGroupID = e.target.dataset.projectId;
-        const projectTasks = listManager.getProjectTasks(currentGroupID);
-        listDOM.displayTodo(projectTasks);
+        const currentGroupID = projectBtn.dataset.projectId;
         currentProjectGroupID = currentGroupID;
+        updProjectTasks();
     });
 
     addProjectForm.addEventListener('submit', function(e) {
@@ -27,11 +32,14 @@ export function initSidebarEvents() {
 
         if(projectTitle === '') return;
 
-        listManager.createProject(projectTitle);
+        const newProjectID = listManager.createProject(projectTitle);
 
         const projects = listManager.getProjects();
         listDOM.displayProjects(projects);
-        
+
+        currentProjectGroupID = newProjectID;
+        updProjectTasks();
+
         addProjectModal.close();
         addProjectForm.reset();
     });
@@ -58,8 +66,7 @@ export function initTodoListEvents() {
 
         listManager.createTask(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote, currentProjectGroupID);
         
-        const projectTasks = listManager.getProjectTasks(currentProjectGroupID);
-        listDOM.displayTodo(projectTasks);
+        updProjectTasks();
         
         addTaskModal.close();
         addTaskForm.reset();
@@ -70,7 +77,6 @@ export function initTodoListEvents() {
         if(!(dltTaskBtn)) return;
 
         listManager.deleteTask(dltTaskBtn.dataset.taskId);
-        const projectTasks = listManager.getProjectTasks(currentProjectGroupID)
-        listDOM.displayTodo(projectTasks);
+        updProjectTasks();
     });
 }
