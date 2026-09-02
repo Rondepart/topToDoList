@@ -46,6 +46,8 @@ export function initTodoListEvents() {
     const taskPriorityInput = document.querySelector('.task-priority');
     const taskNoteInput = document.querySelector('.task-note');
 
+    const listWrapper = document.querySelector('.todolist-wrapper');
+
     addTaskForm.addEventListener('submit' ,function(e) {
         e.preventDefault();
         const taskTitle = taskTitleInput.value;
@@ -61,5 +63,14 @@ export function initTodoListEvents() {
         
         addTaskModal.close();
         addTaskForm.reset();
+    });
+
+    listWrapper.addEventListener('click', function(e){
+        const dltTaskBtn = e.target.closest('.dlt-task-btn');
+        if(!(dltTaskBtn)) return;
+
+        listManager.deleteTask(dltTaskBtn.dataset.taskId);
+        const projectTasks = listManager.getProjectTasks(currentProjectGroupID)
+        listDOM.displayTodo(projectTasks);
     });
 }

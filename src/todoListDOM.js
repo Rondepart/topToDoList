@@ -68,6 +68,7 @@ export function displayTodo(tasks) {
         taskPriority.classList.add('task-card-priority');
         taskNote.classList.add('task-note');
         dltTaskBtn.classList.add('dlt-task-btn');
+        dltTaskBtn.dataset.taskId = task.taskID;
 
         taskTitle.textContent = task.title;
         taskDescription.textContent = task.description;
