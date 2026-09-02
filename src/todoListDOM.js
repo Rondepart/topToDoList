@@ -24,21 +24,21 @@ export function initDueRefresh() {
 }
 
 function getDueDateLabel(dueDateStr) {
-        if (dueDateStr === 'No due date') return dueDateStr;
+    if (dueDateStr === 'No due date') return dueDateStr;
 
-        const [year, month, day] = dueDateStr.split('-').map(Number);
-        const dueDate = new Date(year, month - 1, day);
+    const [year, month, day] = dueDateStr.split('-').map(Number);
+    const dueDate = new Date(year, month - 1, day);
 
-        const dateToday = new Date();
-        dateToday.setHours(0, 0, 0, 0);
+    const dateToday = new Date();
+    dateToday.setHours(0, 0, 0, 0);
 
-        const diffDays = Math.round((dueDate - dateToday) / (1000 * 60 * 60 * 24));
+    const diffDays = Math.round((dueDate - dateToday) / (1000 * 60 * 60 * 24));
 
-        if (diffDays === 0) return 'Due today';
-        if (diffDays === 1) return 'Due tomorrow';
-        if (diffDays > 1) return `${diffDays} days left`;
-        return `Overdue by ${Math.abs(diffDays)} day${Math.abs(diffDays) === 1 ? '' : 's'}`;
-    }
+    if (diffDays === 0) return 'Due today';
+    if (diffDays === 1) return 'Due tomorrow';
+    if (diffDays > 1) return `${diffDays} days left`;
+    return `Overdue by ${Math.abs(diffDays)} day${Math.abs(diffDays) === 1 ? '' : 's'}`;
+}
 
 export function displayTodo(tasks) {
     const todoSection = document.querySelector('.todolist-section');
