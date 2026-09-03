@@ -1,3 +1,7 @@
+button {
+    cursor: pointer;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -37,7 +41,8 @@
   flex-direction: column;
 }
 
-.dlt-task-btn svg {
+.dlt-task-btn svg,
+.edit-task-btn svg {
   width: 16px;
   height: 16px;
-} 
+}
