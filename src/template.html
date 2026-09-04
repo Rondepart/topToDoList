@@ -16,13 +16,16 @@
 
                 <button class="addProject-btn" type="button" command="show-modal" commandfor="add-project">+ Add Project</button>
                 <dialog id="add-project">
-                    <button commandfor="add-project" command="close">X</button>
+                    <button type="button" commandfor="add-project" command="close">X</button>
+                    <h3>Enter your project name</h3>
                     <form class="add-project-form">
-                        <h3>Enter your project name</h3>
-                        <label for="project-title">Project name:
-                            <input type="text" id="project-title" class="project-title" name="projectTitle" maxlength="20" required>
-                        </label>
-                        <button type="submit" class="create-project">Create New Project</button>
+                        <div class="add-project-form-wrapper">
+                            <label for="project-title">Project name:
+                                <input type="text" id="project-title" class="project-title" name="projectTitle" maxlength="20" required>
+                            </label>
+                            <button type="submit" class="create-project">Create New Project</button>
+                            <button type="button" commandfor="add-project" command="close">Cancel</button>
+                        </div>
                     </form>
                 </dialog>
 
@@ -35,10 +38,10 @@
 
                 <button type="button" class="addTask-btn" command="show-modal" commandfor="add-task">+ Add Task</button>
                 <dialog id="add-task">
-                    <button commandfor="add-task" command="close">X</button>
+                    <button type="button" commandfor="add-task" command="close">X</button>
+                    <h3>Fill up required (*) forms to add task to your project</h3>
                     <form class="add-task-form">
                         <div class="add-task-form-wrapper">
-                            <h3>Fill up required (*) forms to add task to your project</h3>
                             <label for="task-title">*Task Title:
                                 <input type="text" id="task-title" class="task-title" name="taskTitle" placeholder="Enter task title" required>
                             </label>
@@ -59,10 +62,42 @@
                                 <textarea name="taskNote" id="task-note" class="task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
                             </label>
                             <button type="submit" class="create-task">Create New Task</button>
+                            <button type="button" commandfor="add-task" command="close">Cancel</button>
                         </div>
                     </form>
                 </dialog>
 
+                <!-- edit task modal opens when edit task btn is clicked, btn dynamically generated in contoroller-->
+                <dialog id="edit-task">
+                    <button type="button" commandfor="edit-task" command="close">X</button>
+                    <h3>Edit task details</h3>
+                    <form class="edit-task-form">
+                        <div class="edit-task-form-wrapper">
+                            <label for="edit-task-title">Task Title:
+                                <input type="text" class="edit-task-title" id="edit-task-title" name="editTaskTitle" placeholder="Enter new title">
+                            </label>
+                            <label for="edit-task-description">Task Description:
+                                <input type="text" class="edit-task-description" id="edit-task-description" name="editTaskDescription" placeholder="Enter new description">
+                            </label>
+                            <label for="edit-task-duedate">Due Date:
+                                <input type="date" id="edit-task-duedate" class="edit-task-duedate" name="editTaskDueDate">
+                            </label>
+                            <label for="edit-task-priority">Task Priority:
+                                <select name="editTaskPriority" id="edit-task-priority" class="edit-task-priority">
+                                    <option value="2">High</option>
+                                    <option value="1">Moderate</option>
+                                    <option value="0" selected>Low</option>
+                                </select>
+                            </label>
+                            <label for="edit-task-note">Note:
+                                <textarea name="editTaskNote" id="edit-task-note" class="edit-task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
+                            </label>
+                            <button type="submit" class="save-edit-task">Save Changes</button>
+                            <button type="button" commandfor="edit-task" command="close">Cancel</button>
+                        </div>
+                    </form>
+                </dialog>
+                <!-- DOM empty & repopulate todolist-section elements dont put elements inside it-->
                 <div class="todolist-section">
 
                 </div>
