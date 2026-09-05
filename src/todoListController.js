@@ -101,4 +101,19 @@ export function initTodoListEvents() {
         listManager.deleteTask(dltTaskBtn.dataset.taskId);
         updProjectTasks();
     });
+
+    //handles task card edit btn
+    listWrapper.addEventListener('click', function(e){
+        const editTaskBtn = e.target.closest('.edit-task-btn');
+        if(!(editTaskBtn)) return;
+
+        const task = listManager.getTask(editTaskBtn.dataset.taskId);
+        editTaskFields.title.value = task.title;
+        editTaskFields.description.value = task.description;
+        editTaskFields.duedate.value = task.dueDate;
+        editTaskFields.priority.value = task.priority;
+        editTaskFields.note.value = task.note;
+
+        editTaskModal.showModal();
+    });
 }
