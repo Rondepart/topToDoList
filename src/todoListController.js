@@ -45,33 +45,55 @@ export function initSidebarEvents() {
     });
 }
 
+function getTaskFields({title, description, duedate, priority, note}) {
+    return {
+        title: document.querySelector(title),
+        description: document.querySelector(description),
+        duedate: document.querySelector(duedate),
+        priority: document.querySelector(priority),
+        note: document.querySelector(note),
+    };
+}
+
 export function initTodoListEvents() {
+    const listWrapper = document.querySelector('.todolist-wrapper');
+    //add task
     const addTaskModal = document.querySelector('#add-task');
     const addTaskForm = document.querySelector('.add-task-form');
-    const taskTitleInput = document.querySelector('.task-title');
-    const taskDescriptionInput = document.querySelector('.task-description');
-    const taskDueDateInput = document.querySelector('.task-duedate');
-    const taskPriorityInput = document.querySelector('.task-priority');
-    const taskNoteInput = document.querySelector('.task-note');
-
-    const listWrapper = document.querySelector('.todolist-wrapper');
+    const addTaskFields = getTaskFields({
+        title: '.task-title',
+        description: '.task-description',
+        duedate: '.task-duedate',
+        priority: '.task-priority',
+        note: '.task-note'
+    });
+    //edit task
+    const editTaskFields = getTaskFields({
+        title: '.edit-task-title',
+        description: '.edit-task-description',
+        duedate: '.edit-task-duedate',
+        priority: '.edit-task-priority',
+        note: '.edit-task-note'
+    });
+    const editTaskModal = document.querySelector('#edit-task');
 
     addTaskForm.addEventListener('submit' ,function(e) {
         e.preventDefault();
-        const taskTitle = taskTitleInput.value;
-        const taskDescription = taskDescriptionInput.value;
-        const taskDueDate = taskDueDateInput.value;
-        const taskPriority = Number(taskPriorityInput.value);
-        const taskNote = taskNoteInput.value;
-
-        listManager.createTask(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote, currentProjectGroupID);
+        listManager.createTask(
+            addTaskFields.title.value, 
+            addTaskFields.description.value, 
+            addTaskFields.duedate.value, 
+            Number(addTaskFields.priority.value), 
+            addTaskFields.note.value, 
+            currentProjectGroupID
+        );
         
         updProjectTasks();
-        
         addTaskModal.close();
         addTaskForm.reset();
     });
 
+    //handles task card dlt btn
     listWrapper.addEventListener('click', function(e){
         const dltTaskBtn = e.target.closest('.dlt-task-btn');
         if(!(dltTaskBtn)) return;
