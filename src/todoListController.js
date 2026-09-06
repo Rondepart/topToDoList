@@ -57,6 +57,8 @@ function getTaskFields({title, description, duedate, priority, note}) {
 
 export function initTodoListEvents() {
     const listWrapper = document.querySelector('.todolist-wrapper');
+    let originalTaskValues = {};
+    
     //add task
     const addTaskModal = document.querySelector('#add-task');
     const addTaskForm = document.querySelector('.add-task-form');
@@ -68,6 +70,9 @@ export function initTodoListEvents() {
         note: '.task-note'
     });
     //edit task
+    const editTaskModal = document.querySelector('#edit-task');
+    const editTaskForm = document.querySelector('.edit-task-form');
+    const saveChangesBtn = document.querySelector('.save-edit-task');
     const editTaskFields = getTaskFields({
         title: '.edit-task-title',
         description: '.edit-task-description',
@@ -75,9 +80,8 @@ export function initTodoListEvents() {
         priority: '.edit-task-priority',
         note: '.edit-task-note'
     });
-    const editTaskModal = document.querySelector('#edit-task');
 
-    addTaskForm.addEventListener('submit' ,function(e) {
+    addTaskForm.addEventListener('submit', function(e) {
         e.preventDefault();
         listManager.createTask(
             addTaskFields.title.value, 
@@ -94,7 +98,7 @@ export function initTodoListEvents() {
     });
 
     //handles task card dlt btn
-    listWrapper.addEventListener('click', function(e){
+    listWrapper.addEventListener('click', function(e) {
         const dltTaskBtn = e.target.closest('.dlt-task-btn');
         if(!(dltTaskBtn)) return;
 
@@ -103,7 +107,7 @@ export function initTodoListEvents() {
     });
 
     //handles task card edit btn
-    listWrapper.addEventListener('click', function(e){
+    listWrapper.addEventListener('click', function(e) {
         const editTaskBtn = e.target.closest('.edit-task-btn');
         if(!(editTaskBtn)) return;
 
@@ -114,6 +118,26 @@ export function initTodoListEvents() {
         editTaskFields.priority.value = task.priority;
         editTaskFields.note.value = task.note;
 
+        originalTaskValues = {
+        title: editTaskFields.title.value,
+        description: editTaskFields.description.value,
+        duedate: editTaskFields.duedate.value,
+        priority: Number(editTaskFields.priority.value),
+        note: editTaskFields.note.value
+        };
+
+        saveChangesBtn.disabled = true;
         editTaskModal.showModal();
+    });
+    
+    //handles edit modal saveChangebtn enabling/disabling
+    editTaskForm.addEventListener('input', function() {
+        const fieldChanged = editTaskFields.title.value !== originalTaskValues.title
+        || editTaskFields.description.value !== originalTaskValues.description
+        || editTaskFields.duedate.value !== originalTaskValues.duedate
+        || Number(editTaskFields.priority.value) !== originalTaskValues.priority
+        || editTaskFields.note.value !== originalTaskValues.note;   
+
+        saveChangesBtn.disabled = !fieldChanged;
     });
 }
