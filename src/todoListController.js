@@ -97,6 +97,10 @@ export function initTodoListEvents() {
         addTaskForm.reset();
     });
 
+    addTaskModal.addEventListener('close', function(){
+        addTaskForm.reset();
+    });
+
     //handles task card dlt btn
     listWrapper.addEventListener('click', function(e) {
         const dltTaskBtn = e.target.closest('.dlt-task-btn');
@@ -129,6 +133,10 @@ export function initTodoListEvents() {
         saveChangesBtn.disabled = true;
         editTaskModal.showModal();
     });
+
+    editTaskModal.addEventListener('close', function() {
+        editTaskForm.reset();
+    })
     
     //handles edit modal saveChangebtn enabling/disabling
     editTaskForm.addEventListener('input', function() {
