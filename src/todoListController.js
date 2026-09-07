@@ -57,6 +57,7 @@ function getTaskFields({title, description, duedate, priority, note}) {
 
 export function initTodoListEvents() {
     const listWrapper = document.querySelector('.todolist-wrapper');
+    //snapshot task modal values
     let originalTaskValues = {};
     
     //add task
@@ -81,6 +82,8 @@ export function initTodoListEvents() {
         note: '.edit-task-note'
     });
 
+    //add task modal listeners
+    //handles add task form submission, creates task
     addTaskForm.addEventListener('submit', function(e) {
         e.preventDefault();
         listManager.createTask(
@@ -100,7 +103,7 @@ export function initTodoListEvents() {
     addTaskModal.addEventListener('close', function(){
         addTaskForm.reset();
     });
-
+    //task card event listeners
     //handles task card dlt btn
     listWrapper.addEventListener('click', function(e) {
         const dltTaskBtn = e.target.closest('.dlt-task-btn');
@@ -123,22 +126,19 @@ export function initTodoListEvents() {
         editTaskFields.note.value = task.note;
 
         originalTaskValues = {
-        ID: task.taskID,
-        title: editTaskFields.title.value,
-        description: editTaskFields.description.value,
-        duedate: editTaskFields.duedate.value,
-        priority: Number(editTaskFields.priority.value),
-        note: editTaskFields.note.value
+            ID: task.taskID,
+            title: editTaskFields.title.value,
+            description: editTaskFields.description.value,
+            duedate: editTaskFields.duedate.value,
+            priority: Number(editTaskFields.priority.value),
+            note: editTaskFields.note.value
         };
 
         saveChangesBtn.disabled = true;
         editTaskModal.showModal();
     });
-
-    editTaskModal.addEventListener('close', function() {
-        editTaskForm.reset();
-    });
-
+    //edit task modal listeners
+    //handles edit form submission, updates task values
     editTaskForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const taskID = originalTaskValues.ID;
@@ -163,5 +163,9 @@ export function initTodoListEvents() {
         || editTaskFields.note.value !== originalTaskValues.note;   
 
         saveChangesBtn.disabled = !fieldChanged;
+    });
+    
+    editTaskModal.addEventListener('close', function() {
+        editTaskForm.reset();
     });
 }
