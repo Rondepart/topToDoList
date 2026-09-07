@@ -123,6 +123,7 @@ export function initTodoListEvents() {
         editTaskFields.note.value = task.note;
 
         originalTaskValues = {
+        ID: task.taskID,
         title: editTaskFields.title.value,
         description: editTaskFields.description.value,
         duedate: editTaskFields.duedate.value,
@@ -136,7 +137,22 @@ export function initTodoListEvents() {
 
     editTaskModal.addEventListener('close', function() {
         editTaskForm.reset();
-    })
+    });
+
+    editTaskForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const taskID = originalTaskValues.ID;
+
+        listManager.updateTaskTitle(taskID, editTaskFields.title.value);
+        listManager.updateTaskDescription(taskID, editTaskFields.description.value);
+        listManager.updateTaskDueDate(taskID, editTaskFields.duedate.value);
+        listManager.updateTaskPriority(taskID, editTaskFields.priority.value);
+        listManager.updateTaskNote(taskID, editTaskFields.note.value);
+
+        updProjectTasks();
+        editTaskModal.close();
+        editTaskForm.reset();
+    });
     
     //handles edit modal saveChangebtn enabling/disabling
     editTaskForm.addEventListener('input', function() {
