@@ -13,6 +13,10 @@ export function getTask(taskID) {
     if(!(checkTaskID(taskID))) return undefined;
     return structuredClone(tasks[taskID]);
 }
+export function getProject(projectID) {
+    if(!(checkProjectID(projectID))) return undefined;
+    return structuredClone(projects[projectID]);
+}
 
 class Task {
     constructor(taskID, title, description, dueDate, priority, note, projectGroupID) {

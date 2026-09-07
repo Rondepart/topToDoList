@@ -15,6 +15,11 @@ export function displayProjects(projects) {
     });
 }
 
+export function updProjectTitle(projectTitle) {
+    const projectHeader = document.querySelector('.todolist-title');
+    projectHeader.textContent = `${projectTitle} tasks`;
+}
+
 export function initDueRefresh() {
     setInterval(() => {
         document.querySelectorAll('.task-card-duedate').forEach(updDue => {
@@ -43,7 +48,7 @@ function getDueDateLabel(dueDateStr) {
 export function displayTodo(tasks) {
     const todoSection = document.querySelector('.todolist-section');
     todoSection.innerHTML = '';
-    const emptyProjectMsg = 'You have no task in this project'; 
+    const emptyProjectMsg = 'You have no tasks in this project'; 
     const priorityLabels = ['Low', 'Moderate', 'High'];
 
     if(tasks.length === 0) {

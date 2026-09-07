@@ -3,9 +3,11 @@ import * as listDOM from './todoListDOM.js';
 
 let currentProjectGroupID = listManager.getDefaultProjectID();
 let projectTasks = listManager.getProjectTasks(currentProjectGroupID);
+listDOM.updProjectTitle(listManager.getProject(currentProjectGroupID).title);
 
 function updProjectTasks() {
     projectTasks = listManager.getProjectTasks(currentProjectGroupID);
+    listDOM.updProjectTitle(listManager.getProject(currentProjectGroupID).title);
     listDOM.displayTodo(projectTasks);
 }
 
