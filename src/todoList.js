@@ -7,11 +7,11 @@ export const getTasks = () => structuredClone(tasks);
 export const getProjects = () => structuredClone(projects);
 export function getProjectTasks(projectID) {
     if(!(checkProjectID(projectID))) return [];
-    return Object.values(tasks).filter(task => task.projectGroupID === projectID);
+    return structuredClone(Object.values(tasks).filter(task => task.projectGroupID === projectID));
 }
 export function getTask(taskID) {
     if(!(checkTaskID(taskID))) return undefined;
-    return tasks[taskID];
+    return structuredClone(tasks[taskID]);
 }
 
 class Task {
