@@ -25,7 +25,7 @@ console.log(listManager.getProjectTasks(defaultProjectID));
 listManager.deleteProject(firstProjectID);
 console.log(listManager.getProjectTasks(defaultProjectID), listManager.getTasks(), listManager.getProjects());
 
-listDOM.displayProjects(listManager.getProjects());
+listDOM.displayProjects(listManager.getProjects(), listManager.getDefaultProjectID());
 listDOM.displayTodo(listManager.getProjectTasks(defaultProjectID));
 listController.initSidebarEvents();
 listController.initTodoListEvents();

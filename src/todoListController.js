@@ -5,7 +5,7 @@ let currentProjectGroupID = listManager.getDefaultProjectID();
 let projectTasks = listManager.getProjectTasks(currentProjectGroupID);
 listDOM.updProjectTitle(listManager.getProject(currentProjectGroupID).title);
 
-function updProjectTasks() {
+function updProjectTasksDOM() {
     projectTasks = listManager.getProjectTasks(currentProjectGroupID);
     listDOM.updProjectTitle(listManager.getProject(currentProjectGroupID).title);
     listDOM.displayTodo(projectTasks);
@@ -16,7 +16,8 @@ export function initSidebarEvents() {
     const addProjectModal = document.querySelector('#add-project');
     const addProjectForm = document.querySelector('.add-project-form');
     const projectTitleInput = document.querySelector('.project-title');
-
+    
+    //handles project tasks display
     sidebarProjects.addEventListener('click', function(e) {
         const projectBtn = e.target.closest('.project-btn');
         if(!projectBtn) {
@@ -25,9 +26,15 @@ export function initSidebarEvents() {
 
         const currentGroupID = projectBtn.dataset.projectId;
         currentProjectGroupID = currentGroupID;
-        updProjectTasks();
+        updProjectTasksDOM();
     });
 
+    //handles add project form reset
+    addProjectModal.addEventListener('close', function(){
+        addProjectForm.reset();
+    });
+
+    //handles add project form
     addProjectForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const projectTitle = projectTitleInput.value;
@@ -37,13 +44,31 @@ export function initSidebarEvents() {
         const newProjectID = listManager.createProject(projectTitle);
 
         const projects = listManager.getProjects();
-        listDOM.displayProjects(projects);
+        listDOM.displayProjects(projects, listManager.getDefaultProjectID());
 
         currentProjectGroupID = newProjectID;
-        updProjectTasks();
+        updProjectTasksDOM();
 
         addProjectModal.close();
         addProjectForm.reset();
+    });
+
+    //handles delete project btn
+    sidebarProjects.addEventListener('click', function(e){
+        const dltProjectBtn = e.target.closest('.dlt-project-btn');
+        if(!(dltProjectBtn)) return;
+        const projectID = dltProjectBtn.dataset.projectId;
+        const projectTitle = listManager.getProject(projectID).title;
+        const isConfirmed = confirm(`Delete ${projectTitle}? Deleting a project will delete all tasks inside the project, are you sure you want to delete?`);
+
+        if (isConfirmed) {
+            listManager.deleteProject(projectID);
+            listDOM.displayProjects(listManager.getProjects(), listManager.getDefaultProjectID());
+            if(projectID === currentProjectGroupID) {
+                currentProjectGroupID = listManager.getDefaultProjectID();
+                updProjectTasksDOM();
+            };
+        }
     });
 }
 
@@ -97,7 +122,7 @@ export function initTodoListEvents() {
             currentProjectGroupID
         );
         
-        updProjectTasks();
+        updProjectTasksDOM();
         addTaskModal.close();
         addTaskForm.reset();
     });
@@ -112,7 +137,7 @@ export function initTodoListEvents() {
         if(!(dltTaskBtn)) return;
 
         listManager.deleteTask(dltTaskBtn.dataset.taskId);
-        updProjectTasks();
+        updProjectTasksDOM();
     });
 
     //handles task card edit btn
@@ -151,7 +176,7 @@ export function initTodoListEvents() {
         listManager.updateTaskPriority(taskID, editTaskFields.priority.value);
         listManager.updateTaskNote(taskID, editTaskFields.note.value);
 
-        updProjectTasks();
+        updProjectTasksDOM();
         editTaskModal.close();
         editTaskForm.reset();
     });
