@@ -16,6 +16,12 @@ export function initSidebarEvents() {
     const addProjectModal = document.querySelector('#add-project');
     const addProjectForm = document.querySelector('.add-project-form');
     const projectTitleInput = document.querySelector('.project-title');
+
+    const editProjectModal = document.querySelector('#edit-project');
+    const editProjectForm = document.querySelector('.edit-project-form');
+    const saveProjectChangesBtn = document.querySelector('.save-edit-project');
+    const editProjectTitleField = document.querySelector('.edit-project-title');
+    let originalProjectValues = {};
     
     //handles project tasks display
     sidebarProjects.addEventListener('click', function(e) {
@@ -51,6 +57,40 @@ export function initSidebarEvents() {
 
         addProjectModal.close();
         addProjectForm.reset();
+    });
+
+    //handles edit project btn
+    sidebarProjects.addEventListener('click', function(e){
+        const editProjectBtn = e.target.closest('.edit-project-btn');
+        if (!(editProjectBtn)) return;
+        
+        const project = listManager.getProject(currentProjectGroupID);
+
+        editProjectTitleField.value = project.title;
+
+        originalProjectValues = {
+            title: editProjectTitleField.value
+        }
+
+        saveProjectChangesBtn.disabled = true;
+        editProjectModal.showModal();
+    });
+
+    //handles save project btn state toggle
+    editProjectForm.addEventListener('input', function(e){
+        const fieldChanged = editProjectTitleField.value !== originalProjectValues.title
+
+        saveProjectChangesBtn.disabled = !fieldChanged;
+    })
+
+    //handles edit project form submission
+    editProjectForm.addEventListener('submit', function(e){
+        e.preventDefault();
+    });
+
+    //handles edit project form reset 
+    editProjectModal.addEventListener('close', function(){
+        editProjectForm.reset();
     });
 
     //handles delete project btn
@@ -100,7 +140,7 @@ export function initTodoListEvents() {
     //edit task
     const editTaskModal = document.querySelector('#edit-task');
     const editTaskForm = document.querySelector('.edit-task-form');
-    const saveChangesBtn = document.querySelector('.save-edit-task');
+    const saveTaskChangesBtn = document.querySelector('.save-edit-task');
     const editTaskFields = getTaskFields({
         title: '.edit-task-title',
         description: '.edit-task-description',
@@ -161,7 +201,7 @@ export function initTodoListEvents() {
             note: editTaskFields.note.value
         };
 
-        saveChangesBtn.disabled = true;
+        saveTaskChangesBtn.disabled = true;
         editTaskModal.showModal();
     });
     //edit task modal listeners
@@ -189,7 +229,7 @@ export function initTodoListEvents() {
         || Number(editTaskFields.priority.value) !== originalTaskValues.priority
         || editTaskFields.note.value !== originalTaskValues.note;   
 
-        saveChangesBtn.disabled = !fieldChanged;
+        saveTaskChangesBtn.disabled = !fieldChanged;
     });
     
     editTaskModal.addEventListener('close', function() {
