@@ -11,6 +11,10 @@ function updProjectTasksDOM() {
     listDOM.displayTodo(projectTasks);
 }
 
+function updSidebarProjectsDOM() {
+    listDOM.displayProjects(listManager.getProjects(), listManager.getDefaultProjectID());
+}
+
 function getProjectFields({title}) {
     return {
         title: document.querySelector(title)
@@ -59,14 +63,11 @@ export function initSidebarEvents() {
 
         const newProjectID = listManager.createProject(projectTitle);
 
-        const projects = listManager.getProjects();
-        listDOM.displayProjects(projects, listManager.getDefaultProjectID());
-
         currentProjectGroupID = newProjectID;
+        updSidebarProjectsDOM();
         updProjectTasksDOM();
 
         addProjectModal.close();
-        addProjectForm.reset();
     });
 
     //handles edit project btn
@@ -79,6 +80,7 @@ export function initSidebarEvents() {
         editProjectFields.title.value = project.title;
 
         originalProjectValues = {
+            id: project.projectID,
             title: editProjectFields.title.value
         }
 
@@ -87,7 +89,7 @@ export function initSidebarEvents() {
     });
 
     //handles save project btn state toggle
-    editProjectForm.addEventListener('input', function(e){
+    editProjectForm.addEventListener('input', function(){
         const fieldChanged = editProjectFields.title.value !== originalProjectValues.title
 
         saveProjectChangesBtn.disabled = !fieldChanged;
@@ -96,6 +98,13 @@ export function initSidebarEvents() {
     //handles edit project form submission
     editProjectForm.addEventListener('submit', function(e){
         e.preventDefault();
+
+        const projectID = originalProjectValues.id;
+        listManager.updateProjectTitle(projectID, editProjectFields.title.value);
+
+        updSidebarProjectsDOM();
+        updProjectTasksDOM();
+        editProjectModal.close();
     });
 
     //handles edit project form reset 
@@ -113,7 +122,7 @@ export function initSidebarEvents() {
 
         if (isConfirmed) {
             listManager.deleteProject(projectID);
-            listDOM.displayProjects(listManager.getProjects(), listManager.getDefaultProjectID());
+            updSidebarProjectsDOM();
             if(projectID === currentProjectGroupID) {
                 currentProjectGroupID = listManager.getDefaultProjectID();
                 updProjectTasksDOM();
@@ -174,7 +183,6 @@ export function initTodoListEvents() {
         
         updProjectTasksDOM();
         addTaskModal.close();
-        addTaskForm.reset();
     });
 
     addTaskModal.addEventListener('close', function(){
@@ -228,7 +236,6 @@ export function initTodoListEvents() {
 
         updProjectTasksDOM();
         editTaskModal.close();
-        editTaskForm.reset();
     });
     
     //handles edit modal saveChangebtn enabling/disabling
