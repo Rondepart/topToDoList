@@ -11,16 +11,26 @@ function updProjectTasksDOM() {
     listDOM.displayTodo(projectTasks);
 }
 
+function getProjectFields({title}) {
+    return {
+        title: document.querySelector(title)
+    };
+}
+
 export function initSidebarEvents() {
     const sidebarProjects = document.querySelector('.sidebar-projects');
     const addProjectModal = document.querySelector('#add-project');
     const addProjectForm = document.querySelector('.add-project-form');
-    const projectTitleInput = document.querySelector('.project-title');
+    const addProjectFields = getProjectFields({
+        title: '.project-title'
+    });
 
     const editProjectModal = document.querySelector('#edit-project');
     const editProjectForm = document.querySelector('.edit-project-form');
     const saveProjectChangesBtn = document.querySelector('.save-edit-project');
-    const editProjectTitleField = document.querySelector('.edit-project-title');
+    const editProjectFields = getProjectFields({
+        title: '.edit-project-title'
+    });
     let originalProjectValues = {};
     
     //handles project tasks display
@@ -43,7 +53,7 @@ export function initSidebarEvents() {
     //handles add project form
     addProjectForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const projectTitle = projectTitleInput.value;
+        const projectTitle = addProjectFields.title.value;
 
         if(projectTitle === '') return;
 
@@ -64,12 +74,12 @@ export function initSidebarEvents() {
         const editProjectBtn = e.target.closest('.edit-project-btn');
         if (!(editProjectBtn)) return;
         
-        const project = listManager.getProject(currentProjectGroupID);
+        const project = listManager.getProject(editProjectBtn.dataset.projectId);
 
-        editProjectTitleField.value = project.title;
+        editProjectFields.title.value = project.title;
 
         originalProjectValues = {
-            title: editProjectTitleField.value
+            title: editProjectFields.title.value
         }
 
         saveProjectChangesBtn.disabled = true;
@@ -78,7 +88,7 @@ export function initSidebarEvents() {
 
     //handles save project btn state toggle
     editProjectForm.addEventListener('input', function(e){
-        const fieldChanged = editProjectTitleField.value !== originalProjectValues.title
+        const fieldChanged = editProjectFields.title.value !== originalProjectValues.title
 
         saveProjectChangesBtn.disabled = !fieldChanged;
     })
