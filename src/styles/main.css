@@ -46,7 +46,7 @@ button {
 .dlt-task-btn svg,
 .edit-task-btn svg,
 .dlt-project-btn svg,
-.rename-project-btn svg {
+.edit-project-btn svg {
   width: 16px;
   height: 16px;
 }

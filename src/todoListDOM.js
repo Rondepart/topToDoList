@@ -18,19 +18,19 @@ export function displayProjects(projects, defaultProjectID) {
         if (projectID !== defaultProjectID) {
             const projectActions = document.createElement('div');
             const dltProjectBtn = document.createElement('button');
-            const renameProjectBtn = document.createElement('button');
+            const editProjectBtn = document.createElement('button');
 
             projectActions.classList.add('project-actions');
             dltProjectBtn.classList.add('dlt-project-btn');
-            renameProjectBtn.classList.add('rename-project-btn');
+            editProjectBtn.classList.add('edit-project-btn');
             dltProjectBtn.dataset.projectId = projectID;
-            renameProjectBtn.dataset.projectId = projectID;
-            renameProjectBtn.title = 'Rename Project';
+            editProjectBtn.dataset.projectId = projectID;
+            editProjectBtn.title = 'Edit Project';
             dltProjectBtn.title = 'Delete Project';
             dltProjectBtn.innerHTML = DELETE_ICON;
-            renameProjectBtn.innerHTML = EDIT_ICON;
+            editProjectBtn.innerHTML = EDIT_ICON;
 
-            projectActions.append(renameProjectBtn, dltProjectBtn);
+            projectActions.append(editProjectBtn, dltProjectBtn);
             projectListItem.appendChild(projectActions);
         }
 
