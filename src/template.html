@@ -29,6 +29,21 @@
                     </form>
                 </dialog>
 
+                <!-- edit project modal, accessed by dynamically created btn from DOM -->
+                <dialog id="edit-project">
+                    <button type="button" commandfor="edit-project" command="close">X</button>
+                    <h3>Edit project details</h3>
+                    <form class="edit-project-form">
+                        <div class="edit-project-form-wrapper">
+                            <label for="edit-project-title">Project Title:
+                                <input type="text" id="edit-project-title" class="edit-project-title" name="editProjectTitle" maxlength="20" required>
+                            </label>
+                            <button type="submit" class="save-edit-project">Save Changes</button>
+                            <button type="button" commandfor="edit-project" command="close">Cancel</button>
+                        </div>
+                    </form>
+                </dialog>
+
                 <ul class="sidebar-projects">
 
                 </ul>
@@ -67,7 +82,7 @@
                     </form>
                 </dialog>
 
-                <!-- edit task modal opens when edit task btn is clicked, btn dynamically generated in contoroller-->
+                <!-- edit task modal, accessed through dynamically created btn on DOM-->
                 <dialog id="edit-task">
                     <button type="button" commandfor="edit-task" command="close">X</button>
                     <h3>Edit task details</h3>
