@@ -1,6 +1,7 @@
 const tasks = {};
 const projects = {};
 let defaultProjectID;
+const STORAGE_KEY = 'todoListData';
 
 export const getDefaultProjectID = () => structuredClone(defaultProjectID);
 export const getTasks = () => structuredClone(tasks);
@@ -16,6 +17,27 @@ export function getTask(taskID) {
 export function getProject(projectID) {
     if(!(checkProjectID(projectID))) return undefined;
     return structuredClone(projects[projectID]);
+}
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks, projects, defaultProjectID }));    
+    } catch {
+        
+    }
+}
+function loadState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+
+    try {
+        const parsed = JSON.parse(raw);
+        Object.assign(tasks, parsed.tasks);
+        Object.assign(projects, parsed.projects);
+        defaultProjectID = parsed.defaultProjectID;
+        return true;
+    } catch {
+        return false;
+    }
 }
 
 class Task {
@@ -78,6 +100,7 @@ priority = 0, note = 'No notes', projectGroupID = defaultProjectID) {
     const task = new Task(taskID, title, description, dueDate, priority, note, projectGroupID);
     tasks[taskID] = task;
 
+    saveState();
     return taskID;
 }
 
@@ -89,6 +112,7 @@ export function createProject(title = 'Untitled Proj') {
     const project = new Project(projectID, title);
     projects[projectID] = project;
 
+    saveState();
     return projectID;
 }
 
@@ -104,6 +128,7 @@ function checkProjectID(projectID) {
 export function deleteTask(taskID) {
     if (!(checkTaskID(taskID))) return;
     delete tasks[taskID];
+    saveState();
 }
 
 export function deleteProject(projectID) {
@@ -115,54 +140,66 @@ export function deleteProject(projectID) {
 
     Object.values(tasks).filter(task => task.projectGroupID === projectID).forEach(task => delete tasks[task.taskID]);
     delete projects[projectID];
+    saveState();
 }
 
 export function updateTaskTitle(taskID, newTitle = 'Untitled') {
     if (!(checkTaskID(taskID))) return;
     newTitle = validateStrProperty(newTitle, 'Untitled');
     tasks[taskID].title = newTitle;
+    saveState();
 }
 
 export function updateTaskDescription(taskID, newDesc = 'No Description') {
     if (!(checkTaskID(taskID))) return;
     newDesc = validateStrProperty(newDesc, 'No Description');
     tasks[taskID].description = newDesc;
+    saveState();
 }
 
 export function updateTaskDueDate(taskID, newDueDate = 'No due date') {
     if (!(checkTaskID(taskID))) return;
     newDueDate = validateStrProperty(newDueDate, 'No due date');
     tasks[taskID].dueDate = newDueDate;
+    saveState();
 }
 
 export function updateTaskPriority(taskID, newPriority = 0) {
     if (!(checkTaskID(taskID))) return;
     newPriority = validateNumProperty(newPriority, 0);
     tasks[taskID].priority = newPriority;
+    saveState();
 }
 
 export function updateTaskNote(taskID, newNote = 'No notes') {
     if (!(checkTaskID(taskID))) return;
     newNote = validateStrProperty(newNote, 'No notes');
     tasks[taskID].note = newNote;
+    saveState();
 }
 
 export function updateTaskProjectGroup(taskID, newProjectGroup = getDefaultProjectID()) {
     if (!(checkTaskID(taskID))) return;
     if (!(checkProjectID(newProjectGroup))) return;
     tasks[taskID].projectGroupID = newProjectGroup;
+    saveState();
 }
 
 export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
     if(!(checkProjectID(projectID))) return;
     newTitle = validateStrProperty(newTitle, 'Untitled Proj');
     projects[projectID].title = newTitle;
+    saveState();
 }
 
+// export function initProject() {
+//     if(Object.keys(projects).length === 0) {   
+//         defaultProjectID = createProject('Uncategorized');
+//     }
+// }
 export function initProject() {
-    if(Object.keys(projects).length === 0) {   
-        defaultProjectID = createProject('Uncategorized');
-    }
+    if (loadState()) return;
+    defaultProjectID = createProject('Uncategorized');
 }
 
 initProject();
