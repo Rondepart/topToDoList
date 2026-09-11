@@ -26,14 +26,21 @@ function saveState() {
     }
 }
 function loadState() {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return false;
-
     try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+
         const parsed = JSON.parse(raw);
-        Object.assign(tasks, parsed.tasks);
-        Object.assign(projects, parsed.projects);
+        Object.entries(parsed.tasks).forEach(([id, data]) => {
+            tasks[id] = Object.assign(new Task(), data)
+        });
+
+        Object.entries(parsed.projects).forEach(([id, data]) => {
+            projects[id] = Object.assign(new Project(), data)
+        });
+
         defaultProjectID = parsed.defaultProjectID;
+        console.log(parsed);
         return true;
     } catch {
         return false;
@@ -192,11 +199,6 @@ export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
     saveState();
 }
 
-// export function initProject() {
-//     if(Object.keys(projects).length === 0) {   
-//         defaultProjectID = createProject('Uncategorized');
-//     }
-// }
 export function initProject() {
     if (loadState()) return;
     defaultProjectID = createProject('Uncategorized');
