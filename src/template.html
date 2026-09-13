@@ -15,7 +15,7 @@
                 <h2 class="sidebar-title">Projects</h2>
 
                 <button class="addProject-btn" type="button" command="show-modal" commandfor="add-project">+ Add Project</button>
-                <dialog id="add-project">
+                <dialog id="add-project" class="add-project">
                     <button type="button" commandfor="add-project" command="close">X</button>
                     <h3>Enter your project name</h3>
                     <form class="add-project-form">
@@ -30,7 +30,7 @@
                 </dialog>
 
                 <!-- edit project modal, accessed by dynamically created btn from DOM -->
-                <dialog id="edit-project">
+                <dialog id="edit-project" class="edit-project">
                     <button type="button" commandfor="edit-project" command="close">X</button>
                     <h3>Edit project details</h3>
                     <form class="edit-project-form">

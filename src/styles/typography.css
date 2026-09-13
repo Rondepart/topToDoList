@@ -24,7 +24,7 @@ body {
 }
 
 /* reuseable font  size class */
-.text-sm { font-size: var((--var(--fs-sm))); }
+.text-sm { font-size: var(--var(--fs-sm));}
 .text-base { font-size: var(--fs-base);}
 .text-md { font-size: var(--fs-md);}
 .text-lg { font-size: var(--fs-lg);}
