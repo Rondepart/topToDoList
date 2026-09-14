@@ -81,6 +81,7 @@ export function displayTodo(tasks) {
 
     tasks.forEach(task => {
         const taskCard = document.createElement('div');
+        const taskCardFields = document.createElement('div');
         const taskTitle = document.createElement('h3');
         const taskDescription = document.createElement('p');
         const taskDueDate = document.createElement('time');
@@ -92,12 +93,13 @@ export function displayTodo(tasks) {
 
         taskCard.classList.add('task-card');
         taskCard.dataset.projectGroupId = task.projectGroupID;
+        taskCardFields.classList.add('task-card-fields');
         taskTitle.classList.add('task-card-title');
         taskDescription.classList.add('task-card-description');
         taskDueDate.classList.add('task-card-duedate');
         taskPriority.classList.add('task-card-priority');
         taskNote.classList.add('task-note');
-        taskCardActions.classList.add('taskcard-actions');
+        taskCardActions.classList.add('task-card-actions');
         editTaskBtn.classList.add('edit-task-btn');
         editTaskBtn.title = 'Edit Task';
         editTaskBtn.dataset.taskId = task.taskID;
@@ -114,8 +116,9 @@ export function displayTodo(tasks) {
         dltTaskBtn.innerHTML = DELETE_ICON;
         editTaskBtn.innerHTML = EDIT_ICON;
 
-        taskCardActions.append(editTaskBtn,dltTaskBtn)
-        taskCard.append(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote, taskCardActions);
+        taskCardFields.append(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote);
+        taskCardActions.append(editTaskBtn,dltTaskBtn);
+        taskCard.append(taskCardFields, taskCardActions);
         todoSection.appendChild(taskCard);
 
     });
