@@ -40,7 +40,6 @@ function loadState() {
         });
 
         defaultProjectID = parsed.defaultProjectID;
-        console.log(parsed);
         return true;
     } catch {
         return false;
