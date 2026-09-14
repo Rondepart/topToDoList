@@ -34,10 +34,9 @@ button {
 }
 
 .addProject-btn,
-.add-project button,
-.edit-project button,
 .addTask-btn,
 .edit-task-btn,
+dialog button,
 .dlt-task-btn {
   &:hover {
     background-color: rgb(220, 220, 220);
@@ -52,11 +51,33 @@ button {
   height: 16px;
 }
 
+.dialog-content-wrapper,
 .add-project-form-wrapper,
+.edit-project-form-wrapper,
 .add-task-form-wrapper,
 .edit-task-form-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+}
+
+dialog {
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
+.dialog-header {
+ display: flex;
+ justify-content: space-between;
+}
+
+.dialog-actions {
+  align-self: flex-end;
+}
+
+dialog label {
+  display: flex;
+  gap: 4px;
 }
 
 /* sidebar css */
@@ -67,7 +88,7 @@ button {
 
   padding: 8px;
   min-height: 100%;
-  min-width: 0;
+  min-width: 200px;
   width: clamp(200px, 10vw ,300px);
   background-color: rgb(190, 134, 99);
   overflow: hidden;
@@ -118,6 +139,33 @@ button {
 /* todolist css */
 .todolist-wrapper {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 300px;
   padding: 0px 16px;
   background-color: rgb(95, 133, 129);
+}
+
+.addTask-btn {
+  align-self: flex-start;
+}
+
+.todolist-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.task-card-title {
+  font-size: var(--fs-base);
 }
