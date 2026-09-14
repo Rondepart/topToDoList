@@ -78,7 +78,7 @@
                                     <input type="text" id="task-title" class="task-title" name="taskTitle" placeholder="Enter task title" required>
                                 </label>
                                 <label for="task-description">*Description:
-                                    <textarea name="taskDescription" id="task-description" class="task-description" rows="3" cols="40" placeholder="Enter task description..." required></textarea>
+                                    <textarea name="taskDescription" id="task-description" class="task-description" rows="4" cols="40" placeholder="Enter task description..." required></textarea>
                                 </label>
                                 <label for="task-duedate">Due Date:
                                     <input type="date" id="task-duedate" class="task-duedate" name="taskDueDate">
@@ -91,7 +91,7 @@
                                     </select>
                                 </label>
                                 <label for="task-note">Note:
-                                    <textarea name="taskNote" id="task-note" class="task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
+                                    <textarea name="taskNote" id="task-note" class="task-note" rows="3" cols="40" placeholder="Enter additional note..."></textarea>
                                 </label>
                                 <button type="submit" class="create-task">Create New Task</button>
                                 <button type="button" commandfor="add-task" command="close">Cancel</button>
@@ -115,7 +115,7 @@
                                     <input type="text" class="edit-task-title" id="edit-task-title" name="editTaskTitle" placeholder="Enter new title">
                                 </label>
                                 <label for="edit-task-description">Task Description:
-                                    <input type="text" class="edit-task-description" id="edit-task-description" name="editTaskDescription" placeholder="Enter new description">
+                                    <textarea class="edit-task-description" id="edit-task-description" name="editTaskDescription" rows="4" cols="40" placeholder="Enter new description"></textarea>
                                 </label>
                                 <label for="edit-task-duedate">Due Date:
                                     <input type="date" id="edit-task-duedate" class="edit-task-duedate" name="editTaskDueDate">
@@ -128,7 +128,7 @@
                                     </select>
                                 </label>
                                 <label for="edit-task-note">Note:
-                                    <textarea name="editTaskNote" id="edit-task-note" class="edit-task-note" rows="5" cols="40" placeholder="Enter additional note..."></textarea>
+                                    <textarea name="editTaskNote" id="edit-task-note" class="edit-task-note" rows="3" cols="40" placeholder="Enter additional note..."></textarea>
                                 </label>
                                 <button type="submit" class="save-edit-task">Save Changes</button>
                                 <button type="button" commandfor="edit-task" command="close">Cancel</button>
