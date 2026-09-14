@@ -86,6 +86,7 @@ export function displayTodo(tasks) {
         const taskDueDate = document.createElement('time');
         const taskPriority = document.createElement('div');
         const taskNote = document.createElement('p');
+        const taskCardActions = document.createElement('div');
         const dltTaskBtn = document.createElement('button');
         const editTaskBtn = document.createElement('button');
 
@@ -96,6 +97,7 @@ export function displayTodo(tasks) {
         taskDueDate.classList.add('task-card-duedate');
         taskPriority.classList.add('task-card-priority');
         taskNote.classList.add('task-note');
+        taskCardActions.classList.add('taskcard-actions');
         editTaskBtn.classList.add('edit-task-btn');
         editTaskBtn.title = 'Edit Task';
         editTaskBtn.dataset.taskId = task.taskID;
@@ -107,12 +109,13 @@ export function displayTodo(tasks) {
         taskDescription.textContent = task.description;
         taskDueDate.textContent = getDueDateLabel(task.dueDate);
         taskDueDate.setAttribute('datetime', task.dueDate);
-        taskPriority.textContent = priorityLabels[task.priority];
-        taskNote.textContent = task.note;
+        taskPriority.textContent = `Priority: ${priorityLabels[task.priority]}`;
+        taskNote.textContent = `Note: ${task.note}`;
         dltTaskBtn.innerHTML = DELETE_ICON;
         editTaskBtn.innerHTML = EDIT_ICON;
 
-        taskCard.append(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote, editTaskBtn, dltTaskBtn);
+        taskCardActions.append(editTaskBtn,dltTaskBtn)
+        taskCard.append(taskTitle, taskDescription, taskDueDate, taskPriority, taskNote, taskCardActions);
         todoSection.appendChild(taskCard);
 
     });
