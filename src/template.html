@@ -17,10 +17,12 @@
                 <button class="addProject-btn" type="button" command="show-modal" commandfor="add-project">+ Add Project</button>
                 <dialog id="add-project" class="add-project">
                     <div class="dialog-content-wrapper">
-                        <div class="dialog-actions">
-                            <button type="button" commandfor="add-project" command="close">X</button>
+                        <div class="dialog-header">
+                            <h3>Enter your project name</h3>
+                            <div class="dialog-actions">
+                                <button type="button" commandfor="add-project" command="close">X</button>
+                            </div>
                         </div>
-                        <h3>Enter your project name</h3>
                         <form class="add-project-form">
                             <div class="add-project-form-wrapper">
                                 <label for="project-title">Project name:
@@ -36,10 +38,12 @@
                 <!-- edit project modal, accessed by dynamically created btn from DOM -->
                 <dialog id="edit-project" class="edit-project">
                     <div class="dialog-content-wrapper">
-                        <div class="dialog-actions">
-                            <button type="button" commandfor="edit-project" command="close">X</button>
+                        <div class="dialog-header">
+                            <h3>Edit project details</h3>
+                            <div class="dialog-actions">
+                                <button type="button" commandfor="edit-project" command="close">X</button>
+                            </div>
                         </div>
-                        <h3>Edit project details</h3>
                         <form class="edit-project-form">
                             <div class="edit-project-form-wrapper">
                                 <label for="edit-project-title">Project Title:
@@ -62,10 +66,12 @@
                 <button type="button" class="addTask-btn" command="show-modal" commandfor="add-task">+ Add Task</button>
                 <dialog id="add-task">
                     <div class="dialog-content-wrapper">
-                        <div class="dialog-actions">
-                            <button type="button" commandfor="add-task" command="close">X</button>
+                        <div class="dialog-header">
+                            <h3>Fill up required (*) forms to add task to your project</h3>
+                            <div class="dialog-actions">
+                                <button type="button" commandfor="add-task" command="close">X</button>
+                            </div>
                         </div>
-                        <h3>Fill up required (*) forms to add task to your project</h3>
                         <form class="add-task-form">
                             <div class="add-task-form-wrapper">
                                 <label for="task-title">*Task Title:
@@ -97,10 +103,12 @@
                 <!-- edit task modal, accessed through dynamically created btn on DOM-->
                 <dialog id="edit-task">
                     <div class="dialog-content-wrapper">
-                        <div class="dialog-actions">
-                            <button type="button" commandfor="edit-task" command="close">X</button>
+                        <div class="dialog-header">
+                            <h3>Edit task details</h3>
+                            <div class="dialog-actions">
+                                <button type="button" commandfor="edit-task" command="close">X</button>
+                            </div>
                         </div>
-                        <h3>Edit task details</h3>
                         <form class="edit-task-form">
                             <div class="edit-task-form-wrapper">
                                 <label for="edit-task-title">Task Title:
