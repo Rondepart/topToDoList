@@ -26,6 +26,39 @@ button {
   flex: 1;
 }
 
+/* shared css */
+.sidebar-title,
+.todolist-title {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+}
+
+.addProject-btn,
+.add-project button,
+.edit-project button,
+.addTask-btn,
+.edit-task-btn,
+.dlt-task-btn {
+  &:hover {
+    background-color: rgb(220, 220, 220);
+  }
+}
+
+.dlt-task-btn svg,
+.edit-task-btn svg,
+.dlt-project-btn svg,
+.edit-project-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.add-project-form-wrapper,
+.add-task-form-wrapper,
+.edit-task-form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 /* sidebar css */
 .sidebar {
   display: flex;
@@ -38,19 +71,6 @@ button {
   width: clamp(200px, 10vw ,300px);
   background-color: rgb(190, 134, 99);
   overflow: hidden;
-}
-
-.sidebar-title {
-  font-size: var(--fs-base);
-  font-weight: var(--fw-medium);
-}
-
-.addProject-btn,
-.add-project button,
-.edit-project button {
-  &:hover {
-    background-color: rgb(220, 220, 220);
-  }
 }
 
 .sidebar-projects {
@@ -73,6 +93,10 @@ button {
 .sidebar-projects button {
   background-color: transparent;
   border: 1px solid black;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .project-btn {
@@ -83,10 +107,6 @@ button {
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: left;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 }
 
 .project-actions {
@@ -100,19 +120,4 @@ button {
   flex: 1;
   padding: 0px 16px;
   background-color: rgb(95, 133, 129);
-}
-
-.add-project-form-wrapper,
-.add-task-form-wrapper,
-.edit-task-form-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.dlt-task-btn svg,
-.edit-task-btn svg,
-.dlt-project-btn svg,
-.edit-project-btn svg {
-  width: 16px;
-  height: 16px;
 }
