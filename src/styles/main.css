@@ -1,8 +1,3 @@
-body {
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
-}
-
 button {
   cursor: pointer;
   border-radius: 4px;
@@ -27,12 +22,6 @@ button {
 }
 
 /* shared css */
-.sidebar-title,
-.todolist-title {
-  font-size: var(--fs-base);
-  font-weight: var(--fw-medium);
-}
-
 .addProject-btn,
 .addTask-btn,
 .edit-task-btn,
@@ -164,8 +153,4 @@ dialog label {
   padding: 8px;
   border: 1px solid black;
   border-radius: 8px;
-}
-
-.task-card-title {
-  font-size: var(--fs-base);
 }

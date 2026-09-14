@@ -1,6 +1,8 @@
 /* System Fonts with system-ui */
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Adwaita Sans", Cantarell, Ubuntu, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Adwaita Sans", Cantarell, Ubuntu, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
 }
 
 /* fluid font sizes */
@@ -38,3 +40,7 @@ body {
 .fw-semibold { font-weight: var(--fw-semibold);}
 .fw-bold { font-weight: var(--fw-bold);}
 .fw-extra-bold { font-weight: var(--fw-extra-bold);}
+
+h1 { font-size: var(--fs-lg); font-weight: var(--fw-semibold); }
+h2 { font-size: var(--fs-md); font-weight: var(--fw-medium); }
+h3 { font-size: var(--fs-base); font-weight: var(--fw-medium); }
