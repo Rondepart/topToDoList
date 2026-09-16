@@ -93,6 +93,7 @@ export function displayTodo(tasks) {
 
         taskCard.classList.add('task-card');
         taskCard.dataset.projectGroupId = task.projectGroupID;
+        taskCard.dataset.priority = task.priority;
         taskCardFields.classList.add('task-card-fields');
         taskTitle.classList.add('task-card-title');
         taskDescription.classList.add('task-card-description');

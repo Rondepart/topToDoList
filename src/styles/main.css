@@ -153,4 +153,29 @@ dialog label {
   padding: 8px;
   border: 1px solid black;
   border-radius: 8px;
+  background-color: rgb(250, 246, 240);
+  border-left: 6px solid rgb(0, 0, 0);
+}
+
+.task-card[data-priority="2"] { border-left-color: rgb(194, 65, 53); }
+.task-card[data-priority="1"] { border-left-color: rgb(210, 162, 40); }
+.task-card[data-priority="0"] { border-left-color: rgb(44, 164, 76); }
+
+.task-card-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.task-card-actions {
+  display: flex;
+  flex: none;
+  align-items: start;
+  gap: 4px;
+}
+
+.task-card-actions button {
+  flex: none;
 }
