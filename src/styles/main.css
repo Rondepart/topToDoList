@@ -40,6 +40,20 @@ dialog button,
   height: 16px;
 }
 
+/* modal/form css */
+dialog {
+  border: 1px solid black;
+  border-radius: 16px;
+  max-height: 85vh;
+  width: min(90vw, 500px);
+  overflow: hidden;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
 .dialog-content-wrapper,
 .add-project-form-wrapper,
 .edit-project-form-wrapper,
@@ -50,23 +64,45 @@ dialog button,
   gap: 8px;
 }
 
-dialog {
-  border: 2px solid black;
-  border-radius: 8px;
+.dialog-content-wrapper {
+  overflow-y: auto;
+  min-height: 0;
+  padding: 8px;
 }
 
 .dialog-header {
- display: flex;
- justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(56, 48, 37, 0.3);
 }
 
 .dialog-actions {
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 dialog label {
   display: flex;
-  gap: 4px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+dialog input,
+dialog select,
+dialog textarea {
+  padding: 8px 10px;
+  border: 1px solid rgba(43, 36, 32, 0.2);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+dialog input:focus,
+dialog select:focus,
+dialog textarea:focus {
+  outline: none;
+  border-color: rgb(169, 136, 90);
+  box-shadow: 0 0 0 3px rgba(169, 136, 90, 0.2);
 }
 
 /* sidebar css */
@@ -123,6 +159,7 @@ dialog label {
   display: flex;
   flex: none;
   flex-direction: column;
+  row-gap: 4px;
 }
 
 /* todolist css */
@@ -151,15 +188,15 @@ dialog label {
   justify-content: space-between;
   gap: 5px;
   padding: 8px;
-  border: 1px solid black;
-  border-radius: 8px;
+  border: 2px  solid black;
+  border-radius: 12px;
   background-color: rgb(250, 246, 240);
   border-left: 6px solid rgb(0, 0, 0);
 }
 
-.task-card[data-priority="2"] { border-left-color: rgb(194, 65, 53); }
-.task-card[data-priority="1"] { border-left-color: rgb(210, 162, 40); }
-.task-card[data-priority="0"] { border-left-color: rgb(44, 164, 76); }
+.task-card[data-priority="2"] { border-color: rgb(194, 65, 53); }
+.task-card[data-priority="1"] { border-color: rgb(210, 162, 40); }
+.task-card[data-priority="0"] { border-color: rgb(44, 164, 76); }
 
 .task-card-fields {
   flex: 1;
