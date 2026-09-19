@@ -1,0 +1,12 @@
+:root {
+  --color-main: rgb(255, 255, 255);
+  --color-bg: rgb(237, 242, 236);
+  --color-neutral: rgb(211, 213, 211);
+
+  --color-highlight: rgb(90, 130, 100);
+  --color-highlight-opaque:rgba(90, 130, 100, 0.35);
+
+  --color-taskcard-highpriority: rgb(194, 65, 53);
+  --color-taskcard-midpriority: rgb(210, 162, 40);
+  --color-taskcard-lowpriority: rgb(44, 164, 76);;
+}

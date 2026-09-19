@@ -1,5 +1,6 @@
 import './styles/reset.css';
 import './styles/typography.css';
+import './styles/color.css';
 import './styles/main.css';
 import * as listManager from './todoList.js';
 import * as listDOM from './todoListDOM.js';
