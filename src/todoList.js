@@ -39,6 +39,10 @@ function loadState() {
             projects[id] = Object.assign(new Project(), data)
         });
 
+        Object.values(tasks).forEach(task => {
+            if (!(task.projectGroupID in projects)) delete tasks[task.taskID];
+        });
+
         defaultProjectID = parsed.defaultProjectID;
         return true;
     } catch {
@@ -199,7 +203,7 @@ export function updateProjectTitle(projectID, newTitle = 'Untitled Proj') {
 }
 
 export function initProject() {
-    if (loadState()) return;
+    if (loadState() && checkProjectID(defaultProjectID)) return;
     defaultProjectID = createProject('Uncategorized');
 }
 
